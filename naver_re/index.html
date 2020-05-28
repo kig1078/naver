@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAVER</title>
+  <meta name="author" content="Jong Kab">
+  <meta name="description" content="네이버 검색창">
+  <meta name="keywords" content="네이버, 초록창, naver, 검색">
+  <meta property="og:title" content="기아자동차">
+  <meta property="og:url" content="https://kig1078.github.io/naver">
+  <!-- <meta property="og:image" content="images/"> -->
+  <meta property="og:description" content="네이버 웹사이트">
+  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <!-- jQuery -->
+  <script src="js/jquery-3.5.0.min.js"></script>
+  <script src="js/all.min.js"></script>
+  <!-- fullPage -->
+  <script type="text/javascript" src="js/fullpage.js"></script>
+  <link rel="stylesheet" href="css/fullpage.css">
+  <script src="js/N_page.js"></script>
+  <!-- <link rel="stylesheet" href="css/login.css"> -->
+  <!-- swiper-slider -->
+  <link rel="stylesheet" href="css/swiper.css">
+  <script src="js/swiper.js"></script>
+  <script src="js/N_swiper.js"></script>
+
+</head>
+<style>
+  .wrap{
+    padding-top:50px;
+  }
+  #fullpage .section{
+    height:100%;
+    box-sizing:border-box;
+  }
+  .header{
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:99999;
+    width:100%;
+    height:50px;
+    background-color:transparent;
+    border-top:2px solid #04f067;
+  }
+  .header>.content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:100%;
+  }
+  .nav>ul{
+    display:flex;
+    padding-right:10px;
+  }
+  .nav>ul>li>a{
+    padding:0 20px;
+    font-size:12px;
+  }
+  .nav>ul>li>.more{
+    margin-left:20px;
+    width:20px;
+    height:20px;
+    background-image:url('images/more.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    cursor:pointer;
+  }
+  .header a:hover,.header a:hover span{
+    color:#04f067;
+    font-weight:bold;
+  }
+  .header .more:hover{
+    background-image:url('images/more_N.png');
+  }
+  .logo{
+    text-align:center;
+    margin-top:-200px;
+    padding-bottom:50px;
+  }
+  .search_bar{
+    width:580px;
+    height:50px;
+    border:1px solid rgba(0,0,0,0.1);
+    border-radius:25px;
+    line-height:50px;
+    margin:0 auto;
+  }
+  .search_bar ul{
+    display:flex;
+  }
+  .search_box{
+    box-sizing:border-box;
+  }
+  .search_box li:nth-of-type(1){
+    width:470px;
+    margin-left:30px;
+  }
+  .search_box li:nth-of-type(2){
+    width:50px;
+    text-align:center;
+    color:#888;
+    cursor:pointer;
+  }
+  .search_box li:nth-of-type(3){
+    width:60px;
+    margin:0;
+    cursor:pointer;
+  }
+  .search_box img{
+    margin:10px 0 0 10px;
+    width:30px;
+  }
+  .bookmark{
+    width:550px;
+    margin:50px auto;
+  }
+  .bookmark ul{
+    display:flex;
+    justify-content:space-between;
+  }
+  .bookmark li{
+    width:100%;
+    text-align:center;
+  }
+  .bookmark li img{
+    width:50px;
+    height:50px;
+    border-radius:25px;
+    background:rgba(0,0,0,0.1);
+  }
+  .bookmark li p{
+    margin-top:5px;
+    font-size:12px;
+  }
+  .movie_banner{
+    position:absolute;
+    left:50%;
+    bottom:6%;
+    transform:translateX(-50%);
+    text-align:center;
+  }
+  .movie_banner img{
+    width:650px;
+    height:130px;
+  }
+  /* 250px까지 반응 */
+</style>
+<style>
+  .section_header{
+    background:#04f067;
+    margin-bottom:50px;
+  }
+  .section_header .content{
+    height:50px;
+  }
+  .news_nav{
+    width:500px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:100%;
+  }
+  .news_nav li{
+    text-align:center;
+  }
+  .news_nav li a{
+    font-size:14px;
+    color:white;
+    padding-left:20px;
+    border-left:1px solid white;
+  }
+  .news_nav li:first-child a{
+    font-size:20px;
+    font-weight:bold;
+    border:none;
+  }
+  .news_nav li:nth-of-type(2) a{
+    border:none;
+  }
+  .news_nav li a:hover{
+    text-decoration:underline;
+  }
+  .news_tit{
+    position:relative;
+    width:700px;
+    height:50px;
+  }
+  .news_tit span i{
+    font-size:10px;
+    color:red;
+    position:absolute;
+    top:0;
+  }
+  .news_tit li{
+    font-size:25px;
+    font-weight:bold;
+    color:#333;
+  }
+  .news_slide img{
+    width:400px;
+    height:250px;
+    margin-right:50px;
+  }
+  .news_slide:first-child{
+    margin-bottom:100px;
+  }
+  .news_list{
+    margin-top:30px;
+  }
+  .news_list li{
+    margin-bottom:20px;
+  }
+  .news_list a{
+    font-size:16px;
+  }
+</style>
+<style>
+  .movie .content{
+    overflow:hidden;
+  }
+  .movie_header .content{
+    height:50px;
+  }
+  .movie_header h2{
+    font-size:20px;
+    font-weight:bold;
+    color:white;
+    line-height:50px;
+  }
+  .movie_tit{
+    margin-bottom:30px;
+  }
+  .movie_tit li{
+    font-size:25px;
+    font-weight:bold;
+  }
+  .movie_tit li span{
+    margin-left:20px;
+    font-size:14px;
+    font-weight:normal;
+  }
+  .box_office{
+    padding:30px 0;
+    margin-bottom:20px;
+  }
+  .box_office .movie_list{
+    width:170px;
+    text-align:center;
+  }
+  .box_office .movie_list li{
+    font-size:12px;
+  }
+  .box_office .movie_list li:first-child{
+    margin:5px 0;
+  }
+  .box_office .movie_list li:first-child a{
+    color:#1a2f63;
+    font-weight:bold;
+  }
+  .box_office img{
+    width:170px;
+  }
+  .movie_slide{
+    cursor:pointer;
+    background:rgba(0,0,0);
+  }
+  .movie_slide:hover .movie_list{
+    text-decoration:underline;
+  }
+  .movie_slide img{
+    width:400px;
+    height:250px;
+    margin-right:50px;
+  }
+  .movie_slide .movie_list_genre{
+    font-size:20px;
+    font-weight:bold;
+    color:white;
+  }
+  .movie_slide .movie_list{
+    margin-top:30px;
+  }
+  .movie_slide .movie_list li{
+    margin-bottom:15px;
+    color:white;
+  }
+  .movie_list_date{
+    font-size:12px;
+  }
+</style>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="content">
+        <div class="logo">
+          <a href="#">
+            <img src="" alt="">
+          </a>
+        </div>
+        <nav class="nav">
+          <ul>
+            <li><a href="#">네이버를 시작페이지로 <span>></span></a></li>
+            <li><a href="login.html" target="_blank">로그인</a></li>
+            <li><a href="#mail">메일</a></li>
+            <li><a href="#knowledge">지식iN</a></li>
+            <li><a href="#webtoon">웹툰</a></li>
+          <li>
+            <div class="more"></div>
+          </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div id="fullpage">
+      <div class="section search" id="search">
+        <div class="content">
+          <section class="logo">
+            <a href="index.html">
+              <img src="images/logo.png" alt="logo">
+            </a>
+          </section>
+          <section class="search_bar">
+            <ul class="search_box clear_fix">
+              <li>
+                <input type="text" placeholder="검색 또는 URL 입력">
+              </li>
+              <li>
+                <i class="fas fa-keyboard"></i>
+                <i class="fas fa-microphone-alt"></i>
+              </li>
+              <li>
+                <img src="images/search.png" alt="search_img">
+              </li>
+            </ul>
+          </section>
+          <section class="bookmark">
+            <ul>
+              <li>
+                <a href="index.html">
+                  <img src="images/quick_naver.png" alt="quick_naver">
+                  <p>NAVER</p>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.google.com">
+                  <img src="images/quick_google.png" alt="quick_naver">
+                  <p>Google</p>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.youtube.com">
+                  <img src="images/quick_youtube.png" alt="quick_youtube">
+                  <p>YouTube</p>
+                </a>
+              </li>
+              <li>
+                <a href="http://www.daum.net">
+                  <img src="images/quick_daum.png" alt="quick_daum">
+                  <p>Daum</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/plus.png" alt="plus">
+                  <p>바로가기 추가</p>
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="movie_banner">
+            <a href="https://www.lottecinema.co.kr">
+              <img src="images/movie_banner.jpg" alt="movie_banner">
+            </a>
+          </section>
+        </div>
+      </div>
+      <div class="section news" id="news">
+        <div class="news_header section_header">
+          <div class="content">
+            <ul class="news_nav">
+              <li>
+                <a href="#news">NAVER 뉴스</a>
+              </li>
+              <li>
+                <a href="#news_enter">TV연예</a>
+              </li>
+              <li>
+                <a href="#news_sports">스포츠</a>
+              </li>
+              <li>
+                <a href="#news_politics">정치</a>
+              </li>
+              <li>
+                <a href="#news_economy">경제</a>
+              </li>
+              <li>
+                <a href="news_society">사회</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="content">
+          <div class="swiper-container01 news_slide news_slide_01">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide clear_fix" id="#news_headline">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">헤드라인 뉴스<span><i>Best</i></span></li>
+                </ul>
+                <img class="fl_left" src="images/headline_img.jpg" alt="headline_img">
+                <ul class="news_list">
+                  <li><a href="#">李 “윤미향, 나도 국민도 배신… 이런 사람 어떻게 의…</a></li>
+                  <li><a href="#">"윤지오 진술 믿을 수 없다"…故장자연 강제추행 무…</a></li>
+                  <li><a href="#">정구철 '사표 낸 건 정의연 불씨 차단' 보도에 "소설"(…</a></li>
+                  <li><a href="#">민경욱 "투표지 6장 준건 개표참관인"…제보자 동반 회…</a></li>
+                  <li><a href="#">강경화 "국제사회 갈등 우려속 동향주시"…미중 갈등 …</a></li>
+                </ul>
+              </div>
+              <div class="swiper-slide clear_fix" id="#news_enter">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">TV연예<span><i>Hot</i></span></li>
+                </ul>
+                <img class="fl_left" src="images/enter_img.jpg" alt="enter_img">
+                <ul class="news_list">
+                  <li><a href="#">[단독] 이동건·조윤희, 3년 만에 갈라섰다…협의이혼 …</a></li>
+                  <li><a href="#">이동건, 3년만에 이혼···양육권은 조윤희(종합)</a></li>
+                  <li><a href="#">조윤희·이동건, 결혼 3년 만에 이혼 각자의 길 걷는다</a></li>
+                  <li><a href="#">"전직 요정 몰락" 슈,집행유예→도박 빚+전세금 패소…</a></li>
+                  <li><a href="#">이동건-조윤희 3년 만에 파경…딸 양육권은 조윤희…</a></li>
+                </ul>
+              </div>
+              <div class="swiper-slide" id="#news_sports">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">스포츠<span><i>Now</i></span></li>
+                </ul>
+                <img class="fl_left" src="images/sports_img.jpg" alt="sports_img">
+                <ul class="news_list">
+                  <li><a href="#">'ML 37홈런' 내려놓은 알테어, 먼저 코치 찾고 데이터…</a></li>
+                  <li><a href="#">[SC핫포커스]KIA 중견수 최원준의 기록되지 않은 …</a></li>
+                  <li><a href="#">'연봉 최대 77% 삭감' 충격받은 MLB 선수들, 대책 …</a></li>
+                  <li><a href="#">재기 성공한 인자기 감독, 세리에B를 평정했다</a></li>
+                  <li><a href="#">‘뿔난’ 베일, “야유하는데 어떻게 잘 하나?”</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-container01 news_slide news_slide_02">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide clear_fix" id="#news_politics">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">정치<span><i>Hot</i></span></li>
+                </ul>
+                <img class="fl_left" src="images/politics_img.jpg" alt="politics_img">
+                <ul class="news_list">
+                  <li><a href="#">文대통령 "기대 아주 커", 주호영 "다 가져간다 말 하면…"</a></li>
+                  <li><a href="#">美中 갈등속 韓 전략논의…강경화 "각자도생·제로섬 경쟁</a></li>
+                  <li><a href="#">김홍걸 "백선엽 친일파 맞다…이장 안되면 '친일표식' 설치</a></li>
+                  <li><a href="#">꿈틀대는 평양 권력… '포스트 김정은' 논의 시작됐나</a></li>
+                  <li><a href="#">곽상도, '이용수 회견 참석' 유포자 檢 고소"서울에 …</a></li>
+                </ul>
+              </div>
+              <div class="swiper-slide clear_fix" id="#news_economy">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">경제</li>
+                </ul>
+                <img class="fl_left" src="images/economy_img.jpg" alt="economy_img">
+                <ul class="news_list">
+                  <li><a href="#">경제개혁연대 “검찰, 박현주 미래에셋 회장 고발 요청…</a></li>
+                  <li><a href="#">초저금리 시대 개막… 다음달 '0%대' 예금상품 나온다 </a></li>
+                  <li><a href="#">[뉴스분석] 기준금리 0.5%까지 낮춘 한은…현실적 …</a></li>
+                  <li><a href="#">후암동 특별계획구역 최고 높이 18층까지 개발가능 </a></li>
+                  <li><a href="#">현대중그룹, 1,950억 규모 중형 LPG선 3척 수주</a></li>
+                </ul>
+              </div>
+              <div class="swiper-slide" id="#news_society">
+                <ul class="news_tit clear_fix">
+                  <li class="fl_left">사회<span><i>Now</i></span></li>
+                </ul>
+                <img class="fl_left" src="images/society_img.jpg" alt="society_img">
+                <ul class="news_list">
+                  <li><a href="#">대법 "'갤노트7' 폭발·단종에 삼성전자 손해배상 …</a></li>
+                  <li><a href="#">현대중공업 노조 부분파업 돌입 </a></li>
+                  <li><a href="#">노모·아들 살해한 ‘장롱시신’ 피의자, 내연녀도 죽이려했다</a></li>
+                  <li><a href="#">“태안 보트 밀입국자 8명” 도운 불법체류 중국인도 검거</a></li>
+                  <li><a href="#">부천 쿠팡물류센터에 집합금지명령… 사실상 영업금지</a></li>                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="section movie" id="movie">
+        <div class="movie_header section_header">
+          <div class="content">
+            <h2>오늘의 추천 영화</h2>
+          </div>
+        </div>
+        <div class="content">
+          <ul class="movie_tit">
+            <li>일간 박스오피스<span>2020.05.27. 누적관객수</span></li>
+          </ul>
+          <div class="swiper-container02 box_office">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="images/movie_img_01.jfif" alt="movie_img_01">
+                <ul class="movie_list">
+                  <li><a href="#">1. 언더워터</a></li>
+                  <li>개봉 2020.05.27</li>
+                  <li>일간 9,687명</li>
+                  <li>누적 9,687명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_02.jfif" alt="movie_img_02">
+                <ul class="movie_list">
+                  <li><a href="#">2. 위대한 쇼맨</a></li>
+                  <li>개봉 2020.05.21</li>
+                  <li>일간 9,015명</li>
+                  <li>누적 1,473,278명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_03.jfif" alt="movie_img_03">
+                <ul class="movie_list">
+                  <li><a href="#">3. 프리즌 이스케이프</a></li>
+                  <li>개봉 2020.05.06</li>
+                  <li>일간 5,810명</li>
+                  <li>누적 141,876명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_04.jfif" alt="movie_img_04">
+                <ul class="movie_list">
+                  <li><a href="#">4. 그 집</a></li>
+                  <li>개봉 2020.05.27</li>
+                  <li>일간 3,966명</li>
+                  <li>누적 5,616명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_05.jfif" alt="movie_img_05">
+                <ul class="movie_list">
+                  <li><a href="#">5. 카페 벨에포크</a></li>
+                  <li>개봉 2020.05.20</li>
+                  <li>일간 3,308명</li>
+                  <li>누적 30,329명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_06.jfif" alt="movie_img_06">
+                <ul class="movie_list">
+                  <li><a href="#">6. 미스비헤이비어</a></li>
+                  <li>개봉 2020.05.27</li>
+                  <li>일간 3,207명</li>
+                  <li>누적 4,333명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_07.jfif" alt="movie_img_07">
+                <ul class="movie_list">
+                  <li><a href="#">7. 아홉 스님</a></li>
+                  <li>개봉 2020.05.27</li>
+                  <li>일간 1,921명</li>
+                  <li>누적 2,440명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_08.jfif" alt="movie_img_08">
+                <ul class="movie_list">
+                  <li><a href="#">8. 초미의 관심사</a></li>
+                  <li>개봉 2020.05.27</li>
+                  <li>일간 1,899명</li>
+                  <li>누적 2,549명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_09.jfif" alt="movie_img_09">
+                <ul class="movie_list">
+                  <li><a href="#">9. 더 플랫폼</a></li>
+                  <li>개봉 2020.05.13</li>
+                  <li>일간 1,376명</li>
+                  <li>누적 56,343명</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img src="images/movie_img_10.jfif" alt="movie_img_10">
+                <ul class="movie_list">
+                  <li><a href="#">10. 패왕별희 디 오리지널</a></li>
+                  <li>개봉 2020.05.01</li>
+                  <li>일간 850명</li>
+                  <li>누적 87,221명</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-container01 movie_slide">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide clear_fix">
+                <img class="fl_left" src="images/movie_list_img_01.jfif" alt="movie_list_img_01">
+                <ul class="movie_list">
+                  <li class="movie_list_genre">영화</li>
+                  <li><a href="#">존재할까? 스쳐 지나간 MCU 속 히어로 떡밥들</a></li>
+                  <li>마블 시네마틱 유니버스(MCU)는 종종 놀라운 디테일과<br>
+                    이스터에그로 팬들을 놀래키기도 합니다. 대표적인<br>
+                    예로 영화 [아이언맨 2(2010)]의 한 장면에선<br>
+                    와칸다 국가가 표시된 지도가 토니 스타크 뒤에…</li>
+                  <li class="movie_list_date">난필 · 어제</li>
+                </ul>
+              </div>
+              <div class="swiper-slide clear_fix">
+                <img class="fl_left" src="images/movie_list_img_02.jfif" alt="movie_list_img_02">
+                <ul class="movie_list">
+                  <li class="movie_list_genre">영화</li>
+                  <li><a href="#">제작비 150억 넘어 핵꿀잼 예상되는 올여름 개봉작 5</a></li>
+                  <li>1. 영화 '다만 악에서 구하소서'- 제작비 약 150억 원<br>
+                    '다만 악에서 구하소서'는 지막 청부살인 미션 때문에<br>
+                    새로운 추격과 사건에 휘말리게 되는 한 남자의 사투를<br>
+                    그린 범죄 액션…</li>
+                  <li class="movie_list_date">Daily Movie · 2일 전</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img class="fl_left" src="images/movie_list_img_03.jfif" alt="movie_list_img_03">
+                <ul class="movie_list">
+                  <li class="movie_list_genre">북미 박스오피스</li>
+                  <li><a href="#">일단 카메라만 잡으면 대박! 실패를 모르는 할리우드 흥행 감독들</a></li>
+                  <li>아무리 뛰어난 영화감독도 내놓는 모든 작품을<br>
+                    흥행시키는 건 어려운 일이다. 그런데 이 어려운 걸 해내는,<br>
+                    이른바 할리우드에서 ‘믿고 맡기는’ 연출자들이 있다.<br>
+                    작품성을 떠나 이들의 영화는 관객을 사로잡을 만한 분명한<br>
+                    강점을 가지고 있기에…</li>
+                  <li class="movie_list_date">씨네플레이 · 어제</li>
+                </ul>
+              </div>
+              <div class="swiper-slide">
+                <img class="fl_left" src="images/movie_list_img_04.jfif" alt="movie_list_img_04">
+                <ul class="movie_list">
+                  <li class="movie_list_genre">다양성영화</li>
+                  <li><a href="#">같은 사람이라구요? 입틀막 하게 만드는 변신 귀재</a></li>
+                  <li>POLL 5월 26일은 헬레나 본햄 카터 배우의 54번 째<br>
+                    생일, 축하 축하!사진 중 어떤 영화를 좋아하시나요?<br>
+                    [하워즈 엔드],[킹스 스피치], [해리포터 시리즈], [스위니 토드],<br>
+                    [파이트 클럽], [빅 피쉬], [유령 신부], [이상한 나라의 앨리스]…</li>
+                  <li class="movie_list_date">알토미디어 · 어제</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</body>
+</html>
